@@ -1,0 +1,6 @@
+@BatizadoDoNovato_HostAddress = http://localhost:5257
+
+GET {{BatizadoDoNovato_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
