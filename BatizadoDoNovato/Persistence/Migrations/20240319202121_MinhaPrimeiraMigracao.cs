@@ -14,8 +14,8 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 name: "Logins",
                 columns: table => new
                 {
-                    Usuario = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Usuario = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {

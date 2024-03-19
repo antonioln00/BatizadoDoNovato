@@ -26,14 +26,14 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 {
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Regular Expression", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8, 15}$");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Usuario")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasAnnotation("Regular Expression", "^[A-Z]+$");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)");
 
                     b.ToTable("Logins");
                 });

@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj": {}
+    "C:\\Users\\anton\\OneDrive\\Área de Trabalho\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj": {
+    "C:\\Users\\anton\\OneDrive\\Área de Trabalho\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
+        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Área de Trabalho\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
         "projectName": "BatizadoDoNovato",
-        "projectPath": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
-        "packagesPath": "C:\\Users\\Moura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\obj\\",
+        "projectPath": "C:\\Users\\anton\\OneDrive\\Área de Trabalho\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
+        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anton\\OneDrive\\Área de Trabalho\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Moura\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,11 +39,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -87,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

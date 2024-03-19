@@ -1,4 +1,5 @@
 using BatizadoDoNovato.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace BatizadoDoNovato.Context;
@@ -17,9 +18,14 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<RegraImposto>().HasKey(e => e.Codigo);
         modelBuilder.Entity<Produto>().HasKey(e => e.Codigo);
 
-        modelBuilder.Entity<Login>().Property(e => e.Usuario).HasAnnotation("MaxLength", 10);
-        modelBuilder.Entity<Login>().Property(e => e.Usuario).HasAnnotation("Regular Expression", @"^[A-Z]+$");
-        modelBuilder.Entity<Login>().Property(e => e.Senha).HasAnnotation("Regular Expression",  @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8, 15}$");
+        modelBuilder.Entity<Login>().Property(e => e.Usuario).HasMaxLength(10).IsUnicode(false);
+        modelBuilder.Entity<Login>().Property(e => e.Senha)
+                .HasMaxLength(15)
+                .IsRequired()
+                .HasConversion(
+                    v => v,
+                    v => ValidatePassword(v) ? v : new("A senha não atende aos requisitos."));
+
 
         modelBuilder.Entity<RegraImposto>().Property(e => e.Nome).HasAnnotation("MaxLength", 50);
         modelBuilder.Entity<RegraImposto>().Property(e => e.Taxa).HasMaxLength(3);
@@ -46,4 +52,9 @@ public class ApplicationDbContext : DbContext
             optionsBuilder.UseSqlServer("DefaultConnection");
         base.OnConfiguring(optionsBuilder);
     }
+
+    private bool ValidatePassword(string password)
+    {
+            return System.Text.RegularExpressions.Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$");
+    }    
 }

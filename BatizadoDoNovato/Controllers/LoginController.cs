@@ -17,24 +17,24 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost("novo-login")]
-    public ActionResult<UserViewModel> Authenticate([FromBody] Login model)
+    public ActionResult<LoginViewModel> Authenticate([FromBody] Login model)
     {
-        UserViewModel userViewModel = new UserViewModel();   
+        LoginViewModel loginViewModel = new LoginViewModel();   
         try
         {
-            userViewModel.Login = new LoginRepository().Get(model);
+            loginViewModel.Login = new LoginRepository().Get(model);
 
-            if(userViewModel.Login == null)
+            if(loginViewModel.Login == null)
                 return NotFound("Usuário não encontrado.");
 
-            userViewModel.Token = new TokenGenerator().Generate();
-            userViewModel.Login.Senha = string.Empty;
+            loginViewModel.Token = new TokenGenerator().Generate();
+            loginViewModel.Login.Senha = string.Empty;
         }
         catch (Exception)
         {
             throw;
         }
 
-        return userViewModel;
+        return loginViewModel;
     }
 }
