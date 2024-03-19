@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BatizadoDoNovato")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fa7065407ca0e899cd111a71f1314a07b094f42")]
 [assembly: System.Reflection.AssemblyProductAttribute("BatizadoDoNovato")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BatizadoDoNovato")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
