@@ -20,17 +20,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Produto>().HasKey(e => e.Codigo);
         modelBuilder.Entity<ProdutoRegraImposto>().HasKey(e => new { e.ProdutoCodigo, e.RegraImpostoCodigo });
 
-        modelBuilder.Entity<Login>().Property(e => e.Usuario).HasMaxLength(10).IsUnicode(false);
-        modelBuilder.Entity<Login>().Property(e => e.Senha)
-                .HasMaxLength(15)
-                .IsRequired()
-                .HasConversion(
-                    v => v,
-                    v => ValidatePassword(v) ? v : new("A senha não atende aos requisitos."));
-
-
-        modelBuilder.Entity<RegraImposto>().Property(e => e.Nome).HasAnnotation("MaxLength", 50);
-        modelBuilder.Entity<RegraImposto>().Property(e => e.Taxa).HasMaxLength(3);
+        modelBuilder.Entity<RegraImposto>().Property(e => e.Taxa).HasPrecision(5,2);
 
         modelBuilder.Entity<Produto>().Property(e => e.Nome).HasAnnotation("MaxLength", 50);
         modelBuilder.Entity<Produto>().Property(e => e.PrecoCusto).HasPrecision(12,2);
@@ -61,9 +51,4 @@ public class ApplicationDbContext : DbContext
             optionsBuilder.UseSqlServer("DefaultConnection");
         base.OnConfiguring(optionsBuilder);
     }
-
-    private bool ValidatePassword(string password)
-    {
-            return System.Text.RegularExpressions.Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$");
-    }    
 }

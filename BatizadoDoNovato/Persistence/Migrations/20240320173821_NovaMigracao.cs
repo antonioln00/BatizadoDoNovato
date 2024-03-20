@@ -14,8 +14,8 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 name: "Logins",
                 columns: table => new
                 {
-                    Usuario = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false)
+                    Usuario = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,8 +44,8 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 {
                     Codigo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Taxa = table.Column<int>(type: "int", maxLength: 3, nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Taxa = table.Column<decimal>(type: "decimal(5,2)", precision: 5, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {

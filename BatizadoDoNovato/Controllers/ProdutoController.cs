@@ -53,13 +53,13 @@ public class ProdutoController : ControllerBase
                 return BadRequest("Novo produto inválido.");
 
             if (model.Markup == 0)
-                novoProduto.Markup = CalculoMarkup(model.PrecoCusto, (decimal)model.PrecoVenda);
+                novoProduto.Markup = _produtoService.CalculoMarkup(model.PrecoCusto, (decimal)model.PrecoVenda);
        
             if (model.PrecoVenda == 0)
-                novoProduto.PrecoVenda = CalculoPrecoVenda(model.PrecoCusto, (decimal)model.Markup);
+                novoProduto.PrecoVenda = _produtoService.CalculoPrecoVenda(model.PrecoCusto, (decimal)model.Markup);
             
             if (model.MargemReal == 0)
-                novoProduto.MargemReal = CalculoMargemReal(model.PrecoCusto, (decimal)novoProduto.PrecoVenda);
+                novoProduto.MargemReal = _produtoService.CalculoMargemReal(model.PrecoCusto, (decimal)novoProduto.PrecoVenda);
 
 
             _context.Produtos.Add(novoProduto);
@@ -125,30 +125,5 @@ public class ProdutoController : ControllerBase
 
             throw;
         }
-    }
-
-    private decimal CalculoMarkup(decimal pc, decimal pv)
-    {
-        decimal markup = (pv - pc) / pc;
-        decimal markupPorcento = markup * 100;
-
-        return markupPorcento;
-    }
-
-    private decimal CalculoPrecoVenda(decimal pc, decimal m)
-    {
-        decimal markupPorcento = m/100;
-        decimal precoVenda = (markupPorcento * pc) + pc;
-
-        return precoVenda;
-    }
-
-    private decimal CalculoMargemReal(decimal pc, decimal pv)
-    {
-        decimal lucro = pv - pc;
-        decimal margemReal = lucro/pv;
-        decimal margemRealPorcento = margemReal * 100;
-
-        return margemRealPorcento;
     }
 }

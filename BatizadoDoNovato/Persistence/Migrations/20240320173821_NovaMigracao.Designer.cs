@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BatizadoDoNovato.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240320172212_NovaMigracao")]
+    [Migration("20240320173821_NovaMigracao")]
     partial class NovaMigracao
     {
         /// <inheritdoc />
@@ -29,14 +29,12 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 {
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Usuario")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.ToTable("Logins");
                 });
@@ -100,12 +98,11 @@ namespace BatizadoDoNovato.Persistence.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Taxa")
-                        .HasMaxLength(3)
-                        .HasColumnType("int");
+                    b.Property<decimal>("Taxa")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
                     b.HasKey("Codigo");
 
