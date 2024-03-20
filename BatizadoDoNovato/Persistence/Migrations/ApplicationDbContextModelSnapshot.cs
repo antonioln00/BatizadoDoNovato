@@ -72,6 +72,21 @@ namespace BatizadoDoNovato.Persistence.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("BatizadoDoNovato.Entities.ProdutoRegraImposto", b =>
+                {
+                    b.Property<int>("ProdutoCodigo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RegraImpostoCodigo")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProdutoCodigo", "RegraImpostoCodigo");
+
+                    b.HasIndex("RegraImpostoCodigo");
+
+                    b.ToTable("ProdutoRegraImposto");
+                });
+
             modelBuilder.Entity("BatizadoDoNovato.Entities.RegraImposto", b =>
                 {
                     b.Property<int>("Codigo")
@@ -85,34 +100,42 @@ namespace BatizadoDoNovato.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Taxa")
                         .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.HasKey("Codigo");
 
-                    b.HasIndex("ProdutoId");
-
                     b.ToTable("RegrasImposto");
                 });
 
-            modelBuilder.Entity("BatizadoDoNovato.Entities.RegraImposto", b =>
+            modelBuilder.Entity("BatizadoDoNovato.Entities.ProdutoRegraImposto", b =>
                 {
                     b.HasOne("BatizadoDoNovato.Entities.Produto", "Produto")
-                        .WithMany("RegrasImposto")
-                        .HasForeignKey("ProdutoId")
+                        .WithMany("ProdutosRegrasImpostos")
+                        .HasForeignKey("ProdutoCodigo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BatizadoDoNovato.Entities.RegraImposto", "RegraImposto")
+                        .WithMany("ProdutosRegrasImpostos")
+                        .HasForeignKey("RegraImpostoCodigo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Produto");
+
+                    b.Navigation("RegraImposto");
                 });
 
             modelBuilder.Entity("BatizadoDoNovato.Entities.Produto", b =>
                 {
-                    b.Navigation("RegrasImposto");
+                    b.Navigation("ProdutosRegrasImpostos");
+                });
+
+            modelBuilder.Entity("BatizadoDoNovato.Entities.RegraImposto", b =>
+                {
+                    b.Navigation("ProdutosRegrasImpostos");
                 });
 #pragma warning restore 612, 618
         }

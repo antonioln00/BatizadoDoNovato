@@ -86,7 +86,6 @@ public class ProdutoController : ControllerBase
         try
         {
             var produto = await _context.Produtos
-                .Include(e => e.RegrasImposto)
                 .FirstOrDefaultAsync(e => e.Codigo == id);
 
             if (produto == null)

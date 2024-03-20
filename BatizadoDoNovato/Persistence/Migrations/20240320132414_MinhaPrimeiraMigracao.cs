@@ -45,24 +45,41 @@ namespace BatizadoDoNovato.Persistence.Migrations
                     Codigo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Taxa = table.Column<int>(type: "int", maxLength: 3, nullable: false),
-                    ProdutoId = table.Column<int>(type: "int", nullable: false)
+                    Taxa = table.Column<int>(type: "int", maxLength: 3, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RegrasImposto", x => x.Codigo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProdutoRegraImposto",
+                columns: table => new
+                {
+                    ProdutoCodigo = table.Column<int>(type: "int", nullable: false),
+                    RegraImpostoCodigo = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProdutoRegraImposto", x => new { x.ProdutoCodigo, x.RegraImpostoCodigo });
                     table.ForeignKey(
-                        name: "FK_RegrasImposto_Produtos_ProdutoId",
-                        column: x => x.ProdutoId,
+                        name: "FK_ProdutoRegraImposto_Produtos_ProdutoCodigo",
+                        column: x => x.ProdutoCodigo,
                         principalTable: "Produtos",
+                        principalColumn: "Codigo",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProdutoRegraImposto_RegrasImposto_RegraImpostoCodigo",
+                        column: x => x.RegraImpostoCodigo,
+                        principalTable: "RegrasImposto",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RegrasImposto_ProdutoId",
-                table: "RegrasImposto",
-                column: "ProdutoId");
+                name: "IX_ProdutoRegraImposto_RegraImpostoCodigo",
+                table: "ProdutoRegraImposto",
+                column: "RegraImpostoCodigo");
         }
 
         /// <inheritdoc />
@@ -72,10 +89,13 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 name: "Logins");
 
             migrationBuilder.DropTable(
-                name: "RegrasImposto");
+                name: "ProdutoRegraImposto");
 
             migrationBuilder.DropTable(
                 name: "Produtos");
+
+            migrationBuilder.DropTable(
+                name: "RegrasImposto");
         }
     }
 }

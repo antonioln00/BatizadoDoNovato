@@ -17,7 +17,7 @@ public class RegraImpostoController : ControllerBase
 
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<RegraImposto>>> ObterTodos() =>
-        Ok(await _context.Produtos.ToListAsync());
+        Ok(await _context.RegrasImposto.ToListAsync());
 
     [HttpPost("nova-regra-imposto")]
     public async Task<ActionResult<RegraImposto>> NovaRegraImposto([FromBody] RegraImposto model)
@@ -30,7 +30,6 @@ public class RegraImpostoController : ControllerBase
             var novaRegraImposto = new RegraImposto {
                 Nome = model.Nome,
                 Taxa = model.Taxa,
-                ProdutoId = model.ProdutoId
             };
 
             if (novaRegraImposto == null)

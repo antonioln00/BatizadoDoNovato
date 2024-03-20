@@ -15,7 +15,7 @@ public class TokenGenerator
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenConstants.Secret)),
                 SecurityAlgorithms.HmacSha256Signature
-            ), 
+            ),
             Expires = DateTime.Now.AddDays(1)
         };
 

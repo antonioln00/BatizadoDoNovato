@@ -7,7 +7,7 @@ public class Produto
     public decimal? Markup { get; set; } 
     public decimal? PrecoVenda { get; set; }
     public decimal? MargemReal { get; set; }
-    public virtual IEnumerable<RegraImposto>? RegrasImposto { get; set; }
+    public virtual IList<ProdutoRegraImposto>? ProdutosRegrasImpostos { get; set; }
     public Produto()
     {
         PrecoCusto = 0.00m;

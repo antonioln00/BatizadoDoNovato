@@ -17,6 +17,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Login>().HasNoKey();
         modelBuilder.Entity<RegraImposto>().HasKey(e => e.Codigo);
         modelBuilder.Entity<Produto>().HasKey(e => e.Codigo);
+        modelBuilder.Entity<ProdutoRegraImposto>().HasKey(e => new { e.ProdutoCodigo, e.RegraImpostoCodigo });
 
         modelBuilder.Entity<Login>().Property(e => e.Usuario).HasMaxLength(10).IsUnicode(false);
         modelBuilder.Entity<Login>().Property(e => e.Senha)
@@ -37,10 +38,17 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Produto>().Property(e => e.MargemReal).HasPrecision(8,2);
 
         modelBuilder
-            .Entity<RegraImposto>() // Na tabela Regra Imposto
+            .Entity<ProdutoRegraImposto>() // Na tabela Regra Imposto
             .HasOne(e => e.Produto) // tem um produto
-            .WithMany(e => e.RegrasImposto) // para muitas regras de imposto
-            .HasForeignKey(e => e.ProdutoId) // referenciados pela chave estrangeira produtoId
+            .WithMany(e => e.ProdutosRegrasImpostos) // para muitas regras de imposto
+            .HasForeignKey(e => e.ProdutoCodigo) // referenciados pela chave estrangeira produtoId
+            .IsRequired();
+
+        modelBuilder
+            .Entity<ProdutoRegraImposto>()
+            .HasOne(e => e.RegraImposto)
+            .WithMany(e => e.ProdutosRegrasImpostos)
+            .HasForeignKey(e => e.RegraImpostoCodigo)
             .IsRequired();
 
         base.OnModelCreating(modelBuilder);
