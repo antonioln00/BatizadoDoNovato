@@ -52,6 +52,12 @@ public class ProdutoController : ControllerBase
             if (novoProduto == null)
                 return BadRequest("Novo produto inválido.");
 
+            if (string.IsNullOrEmpty(novoProduto.Nome))
+                return BadRequest("O nome do produto é obrigatório");
+
+            if (novoProduto.PrecoCusto == 0)
+                return BadRequest("O preço de custo do produto é obrigatório.");
+
             if (model.Markup == 0)
                 novoProduto.Markup = _produtoService.CalculoMarkup(model.PrecoCusto, (decimal)model.PrecoVenda);
        

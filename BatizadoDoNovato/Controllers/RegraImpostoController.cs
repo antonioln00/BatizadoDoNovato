@@ -47,6 +47,12 @@ public class RegraImpostoController : ControllerBase
             if (novaRegraImposto == null)
                 return BadRequest("Nova regra de imposto é inválida.");
 
+            if (string.IsNullOrEmpty(novaRegraImposto.Nome))
+                return BadRequest("O nome da regra de imposto é obrigatório.");
+
+            if (novaRegraImposto.Taxa == 0)
+                return BadRequest("A taxa da regra de imposto é obrigatória.");
+
             _context.RegrasImposto.Add(novaRegraImposto);
             await _context.SaveChangesAsync();
 
