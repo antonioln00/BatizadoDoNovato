@@ -17,7 +17,19 @@ public class RegraImpostoController : ControllerBase
 
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<RegraImposto>>> ObterTodos() =>
-        Ok(await _context.RegrasImposto.ToListAsync());
+        Ok(await _context.RegrasImposto.Select(ri => new {
+            ri.Codigo,
+            ri.Nome,
+            ri.Taxa,
+            Produtos = ri.ProdutosRegrasImpostos.Where(e => e.ProdutoCodigo == e.Produto.Codigo).Select(produto => new {
+                produto.Produto.Codigo,
+                produto.Produto.Nome,
+                produto.Produto.PrecoCusto,
+                produto.Produto.Markup,
+                produto.Produto.PrecoVenda,
+                produto.Produto.MargemReal
+            })
+        }).ToListAsync());
 
     [HttpPost("nova-regra-imposto")]
     public async Task<ActionResult<RegraImposto>> NovaRegraImposto([FromBody] RegraImposto model)

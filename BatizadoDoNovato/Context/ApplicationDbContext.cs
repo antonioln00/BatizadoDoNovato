@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Login> Logins { get; set; }
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<RegraImposto> RegrasImposto { get; set; }
+    public DbSet<ProdutoRegraImposto> ProdutosRegrasImposto { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,10 +39,10 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Produto>().Property(e => e.MargemReal).HasPrecision(8,2);
 
         modelBuilder
-            .Entity<ProdutoRegraImposto>() // Na tabela Regra Imposto
+            .Entity<ProdutoRegraImposto>() // Na tabela ProdutoRegraImposto
             .HasOne(e => e.Produto) // tem um produto
-            .WithMany(e => e.ProdutosRegrasImpostos) // para muitas regras de imposto
-            .HasForeignKey(e => e.ProdutoCodigo) // referenciados pela chave estrangeira produtoId
+            .WithMany(e => e.ProdutosRegrasImpostos) // para muitos produtos regras de imposto
+            .HasForeignKey(e => e.ProdutoCodigo) // referenciados pela chave estrangeira ProdutoCodigo
             .IsRequired();
 
         modelBuilder

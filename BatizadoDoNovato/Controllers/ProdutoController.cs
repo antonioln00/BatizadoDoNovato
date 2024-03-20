@@ -46,8 +46,7 @@ public class ProdutoController : ControllerBase
                 Nome = model.Nome,
                 PrecoCusto = model.PrecoCusto,
                 Markup = model.Markup,
-                PrecoVenda = model.PrecoVenda,
-                MargemReal = model.MargemReal
+                PrecoVenda = model.PrecoVenda
             };
 
             if (novoProduto == null)

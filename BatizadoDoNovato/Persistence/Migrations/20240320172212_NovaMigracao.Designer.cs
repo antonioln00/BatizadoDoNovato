@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BatizadoDoNovato.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240320132414_MinhaPrimeiraMigracao")]
-    partial class MinhaPrimeiraMigracao
+    [Migration("20240320172212_NovaMigracao")]
+    partial class NovaMigracao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace BatizadoDoNovato.Persistence.Migrations
 
                     b.HasIndex("RegraImpostoCodigo");
 
-                    b.ToTable("ProdutoRegraImposto");
+                    b.ToTable("ProdutosRegrasImposto");
                 });
 
             modelBuilder.Entity("BatizadoDoNovato.Entities.RegraImposto", b =>

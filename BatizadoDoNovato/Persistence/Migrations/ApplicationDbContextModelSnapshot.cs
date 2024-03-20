@@ -84,7 +84,7 @@ namespace BatizadoDoNovato.Persistence.Migrations
 
                     b.HasIndex("RegraImpostoCodigo");
 
-                    b.ToTable("ProdutoRegraImposto");
+                    b.ToTable("ProdutosRegrasImposto");
                 });
 
             modelBuilder.Entity("BatizadoDoNovato.Entities.RegraImposto", b =>

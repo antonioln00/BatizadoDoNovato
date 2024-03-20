@@ -5,7 +5,7 @@
 namespace BatizadoDoNovato.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class MinhaPrimeiraMigracao : Migration
+    public partial class NovaMigracao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,7 +53,7 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProdutoRegraImposto",
+                name: "ProdutosRegrasImposto",
                 columns: table => new
                 {
                     ProdutoCodigo = table.Column<int>(type: "int", nullable: false),
@@ -61,15 +61,15 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProdutoRegraImposto", x => new { x.ProdutoCodigo, x.RegraImpostoCodigo });
+                    table.PrimaryKey("PK_ProdutosRegrasImposto", x => new { x.ProdutoCodigo, x.RegraImpostoCodigo });
                     table.ForeignKey(
-                        name: "FK_ProdutoRegraImposto_Produtos_ProdutoCodigo",
+                        name: "FK_ProdutosRegrasImposto_Produtos_ProdutoCodigo",
                         column: x => x.ProdutoCodigo,
                         principalTable: "Produtos",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProdutoRegraImposto_RegrasImposto_RegraImpostoCodigo",
+                        name: "FK_ProdutosRegrasImposto_RegrasImposto_RegraImpostoCodigo",
                         column: x => x.RegraImpostoCodigo,
                         principalTable: "RegrasImposto",
                         principalColumn: "Codigo",
@@ -77,8 +77,8 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProdutoRegraImposto_RegraImpostoCodigo",
-                table: "ProdutoRegraImposto",
+                name: "IX_ProdutosRegrasImposto_RegraImpostoCodigo",
+                table: "ProdutosRegrasImposto",
                 column: "RegraImpostoCodigo");
         }
 
@@ -89,7 +89,7 @@ namespace BatizadoDoNovato.Persistence.Migrations
                 name: "Logins");
 
             migrationBuilder.DropTable(
-                name: "ProdutoRegraImposto");
+                name: "ProdutosRegrasImposto");
 
             migrationBuilder.DropTable(
                 name: "Produtos");
