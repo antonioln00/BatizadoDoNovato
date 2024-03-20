@@ -1,5 +1,6 @@
 using BatizadoDoNovato.Context;
 using BatizadoDoNovato.Entities;
+using BatizadoDoNovato.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,14 +10,28 @@ namespace BatizadoDoNovato.Controllers;
 public class ProdutoController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-    public ProdutoController(ApplicationDbContext context)
+    private readonly ProdutoService _produtoService;
+    public ProdutoController(ApplicationDbContext context, ProdutoService produtoService)
     {
         _context = context;
+        _produtoService = produtoService;
     }
 
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<Produto>>> ObterTodos() =>
-        Ok(await _context.Produtos.ToListAsync());
+        Ok(await _context.Produtos.Select(produto => new {
+            produto.Codigo,
+            produto.Nome,
+            produto.PrecoCusto,
+            produto.Markup,
+            produto.PrecoVenda,
+            produto.MargemReal,
+            RegrasImposto = produto.ProdutosRegrasImpostos.Select(pri => new {
+                pri.RegraImposto.Codigo,
+                pri.RegraImposto.Nome,
+                pri.RegraImposto.Taxa
+            })
+        }).ToListAsync());
 
     [HttpPost("novo-produto")]
     public async Task<ActionResult<Produto>> NovoProduto([FromBody] Produto model)
@@ -38,10 +53,20 @@ public class ProdutoController : ControllerBase
             if (novoProduto == null)
                 return BadRequest("Novo produto inválido.");
 
+            if (model.Markup == 0)
+                novoProduto.Markup = CalculoMarkup(model.PrecoCusto, (decimal)model.PrecoVenda);
+       
+            if (model.PrecoVenda == 0)
+                novoProduto.PrecoVenda = CalculoPrecoVenda(model.PrecoCusto, (decimal)model.Markup);
+            
+            if (model.MargemReal == 0)
+                novoProduto.MargemReal = CalculoMargemReal(model.PrecoCusto, (decimal)novoProduto.PrecoVenda);
+
+
             _context.Produtos.Add(novoProduto);
             await _context.SaveChangesAsync();
 
-            return Ok(model);
+            return Ok(novoProduto);
         }
         catch (Exception)
         {
@@ -101,5 +126,30 @@ public class ProdutoController : ControllerBase
 
             throw;
         }
+    }
+
+    private decimal CalculoMarkup(decimal pc, decimal pv)
+    {
+        decimal markup = (pv - pc) / pc;
+        decimal markupPorcento = markup * 100;
+
+        return markupPorcento;
+    }
+
+    private decimal CalculoPrecoVenda(decimal pc, decimal m)
+    {
+        decimal markupPorcento = m/100;
+        decimal precoVenda = (markupPorcento * pc) + pc;
+
+        return precoVenda;
+    }
+
+    private decimal CalculoMargemReal(decimal pc, decimal pv)
+    {
+        decimal lucro = pv - pc;
+        decimal margemReal = lucro/pv;
+        decimal margemRealPorcento = margemReal * 100;
+
+        return margemRealPorcento;
     }
 }
