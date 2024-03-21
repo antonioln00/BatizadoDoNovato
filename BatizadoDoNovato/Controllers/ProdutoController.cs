@@ -17,7 +17,7 @@ public class ProdutoController : ControllerBase
         _produtoService = produtoService;
     }
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<Produto>>> ObterTodos() =>
         Ok(await _context.Produtos.Select(produto => new {
             produto.Codigo,
@@ -33,7 +33,7 @@ public class ProdutoController : ControllerBase
             })
         }).ToListAsync());
 
-    [HttpPost("novo-produto")]
+    [HttpPost]
     public async Task<ActionResult<Produto>> NovoProduto([FromBody] Produto model)
     {
         try
@@ -80,7 +80,7 @@ public class ProdutoController : ControllerBase
         }
     }
 
-    [HttpPut("alterar-produto/{id:int}")]
+    [HttpPut("{id:int}")]
     public async Task<ActionResult<Produto>> AlterarProduto(int id, Produto model)
     {
         try
@@ -110,7 +110,7 @@ public class ProdutoController : ControllerBase
         }
     }
 
-    [HttpDelete("deletar-produto/{id}")]
+    [HttpDelete("{id}")]
     public async Task<ActionResult> DeletarProduto(int id)
     {
         try

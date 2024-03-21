@@ -1,0 +1,25 @@
+<button (click)="carregarProdutos()">Carregar Produtos</button>
+
+<table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Preço de Custo</th>
+        <th>Markup</th>
+        <th>PrecoVenda</th>
+        <th>MargemReal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of Produtos">
+        <td>{{ produto.Codigo }}</td>
+        <td>{{ produto.Nome }}</td>
+        <td>{{ produto.PrecoCusto | currency }}</td>
+        <td>{{ produto.Markup | currency }}</td>
+        <td>{{ produto.PrecoVenda | currency }}</td>
+        <td>{{ produto.MargemReal | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
