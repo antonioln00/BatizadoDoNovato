@@ -4439,11 +4439,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
+      "projectUniqueName": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
       "projectName": "BatizadoDoNovato",
-      "projectPath": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
+      "projectPath": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato.csproj",
       "packagesPath": "C:\\Users\\Moura\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\BatizadoDoNovato\\obj\\",
+      "outputPath": "C:\\Users\\Moura\\Desktop\\DotNet\\GitHub\\BatizadoDoNovato\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Moura\\AppData\\Roaming\\NuGet\\NuGet.Config"
