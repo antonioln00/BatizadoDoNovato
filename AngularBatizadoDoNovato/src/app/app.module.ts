@@ -8,6 +8,7 @@ import { ProdutoIndexComponent } from './components/produto/produto-index/produt
 import { ListarRegraImpostoComponent } from './components/regra-imposto/listar-regra-imposto/listar-regra-imposto.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

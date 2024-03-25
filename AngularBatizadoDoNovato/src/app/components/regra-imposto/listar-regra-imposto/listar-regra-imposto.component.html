@@ -1,1 +1,24 @@
-<p>listar-regra-imposto works!</p>
+<form>
+  <div>
+    <label for="codigo">Insira o código:</label> <br>
+    <input type="text" placeholder="Insira o código aqui...">
+    <button (click)="pesquisarRegraImposto()" >
+      <img src="../../../../assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;" alt="Lupa azul para pesquisa">
+    </button>
+
+    <table *ngIf="RegrasImposto && RegrasImposto.length > 0">
+      <thead>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Taxa</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let regraImposto of RegrasImposto">
+          <td>{{regraImposto.codigo}}</td>
+          <td>{{regraImposto.nome}}</td>
+          <td>{{regraImposto.taxa}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

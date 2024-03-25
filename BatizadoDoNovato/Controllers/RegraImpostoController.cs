@@ -15,7 +15,7 @@ public class RegraImpostoController : ControllerBase
         _context = context;
     }
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<RegraImposto>>> ObterTodos() =>
         Ok(await _context.RegrasImposto.Select(ri => new {
             ri.Codigo,
@@ -31,7 +31,7 @@ public class RegraImpostoController : ControllerBase
             })
         }).ToListAsync());
 
-    [HttpPost("nova-regra-imposto")]
+    [HttpPost]
     public async Task<ActionResult<RegraImposto>> NovaRegraImposto([FromBody] RegraImposto model)
     {
         try
@@ -65,7 +65,7 @@ public class RegraImpostoController : ControllerBase
         }
     }
 
-    [HttpPut("atualizar-regra-imposto/{id:int}")]
+    [HttpPut("{id:int}")]
     public async Task<ActionResult<RegraImposto>> AtualizarRegraImposto(int id, RegraImposto model)
     {
         try
@@ -92,7 +92,7 @@ public class RegraImpostoController : ControllerBase
         }
     }
 
-    [HttpDelete("deletar-regra-imposto/{id}")]
+    [HttpDelete("{id}")]
     public async Task<ActionResult> DeletarRegraImposto(int id)
     {
         try
