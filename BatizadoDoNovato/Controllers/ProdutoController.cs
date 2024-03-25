@@ -33,6 +33,22 @@ public class ProdutoController : ControllerBase
             })
         }).ToListAsync());
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<IEnumerable<Produto>>> ObterPorId(int id) =>
+        Ok(await _context.Produtos.Select(produto => new {
+            produto.Codigo,
+            produto.Nome,
+            produto.PrecoCusto,
+            produto.Markup,
+            produto.PrecoVenda,
+            produto.MargemReal,
+            RegrasImposto = produto.ProdutosRegrasImpostos.Select(pri => new {
+                pri.RegraImposto.Codigo,
+                pri.RegraImposto.Nome,
+                pri.RegraImposto.Taxa
+            })
+        }).FirstOrDefaultAsync(e => e.Codigo == id));
+
     [HttpPost]
     public async Task<ActionResult<Produto>> NovoProduto([FromBody] Produto model)
     {
