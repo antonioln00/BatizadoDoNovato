@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProdutoIndexComponent } from './components/produto/produto-index/produto-index.component';
+import { ListarRegraImpostoComponent } from './components/regra-imposto/listar-regra-imposto/listar-regra-imposto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProdutoIndexComponent
+    ProdutoIndexComponent,
+    ListarRegraImpostoComponent
   ],
   imports: [
     BrowserModule,
