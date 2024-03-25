@@ -1,24 +1,26 @@
 <form>
   <div>
     <label for="codigo">Insira o código:</label> <br>
-    <input type="text" placeholder="Insira o código aqui...">
-    <button (click)="pesquisarRegraImposto()" >
-      <img src="../../../../assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;" alt="Lupa azul para pesquisa">
+    <input type="text" placeholder="Insira o código aqui..." id="codigo" nome="codigo" [(ngModel)]="regraImposto.codigo"
+      [ngModelOptions]="{standalone: true}">
+    <button (click)="pesquisarRegraImposto()">
+      <img src="../../../../assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;"
+        alt="Lupa azul para pesquisa">
     </button>
+  </div>
 
-    <table *ngIf="RegrasImposto && RegrasImposto.length > 0">
-      <thead>
-        <th>Código</th>
-        <th>Nome</th>
-        <th>Taxa</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let regraImposto of RegrasImposto">
+  <table *ngIf="regrasImposto && regrasImposto.length > 0">
+    <thead>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Taxa</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let regraImposto of regrasImposto">
           <td>{{regraImposto.codigo}}</td>
           <td>{{regraImposto.nome}}</td>
           <td>{{regraImposto.taxa}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      </tr>
+    </tbody>
+  </table>
 </form>
