@@ -1,21 +1,21 @@
 import { RegraImposto } from "./regraImposto.model";
 
 export class Produto {
-    Codigo!: number;
-    Nome: string;
-    PrecoCusto: number;
-    Markup: number;
-    PrecoVenda: number;
-    MargemReal: number;
-    RegrasImposto: RegraImposto[];
+    codigo!: number;
+    nome: string;
+    precoCusto: number;
+    markup: number;
+    precoVenda: number;
+    margemReal: number;
+    regrasImposto: RegraImposto[];
 
     constructor() {
-        this.Nome = '';
-        this.PrecoCusto = 0.00;
-        this.Markup = 0.00;
-        this.PrecoVenda = 0.00;
-        this.MargemReal = 0.00;
-        this.RegrasImposto = []; 
+        this.nome = '';
+        this.precoCusto = 0.00;
+        this.markup = 0.00;
+        this.precoVenda = 0.00;
+        this.margemReal = 0.00;
+        this.regrasImposto = [];
 
     }
 

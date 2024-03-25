@@ -8,13 +8,12 @@ import { Produto } from '../models/produto.model';
 })
 export class ProdutoService {
 
-  private url: string;
+  private readonly _api = "http://localhost:5257/produto"
 
-  constructor(private http: HttpClient) {
-    this.url = "http://localhost:5257/produto";
+  constructor(private _http: HttpClient) {
    }
 
    get(): Observable<Produto[]>{
-    return this.http.get<Produto[]>(this.url);
+    return this._http.get<Produto[]>(this._api);
   }
 }
