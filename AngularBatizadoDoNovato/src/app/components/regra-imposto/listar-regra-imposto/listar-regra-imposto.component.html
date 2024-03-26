@@ -1,9 +1,9 @@
 <form>
   <div>
     <label for="codigo">Insira o código:</label> <br>
-    <input type="text" placeholder="Insira o código aqui..." id="codigo" nome="codigo" [(ngModel)]="regraImposto.codigo"
-      [ngModelOptions]="{standalone: true}">
-    <button (click)="pesquisarRegraImposto()">
+    <input type="text" id="codigo" nome="codigo" [(ngModel)]="regraImposto.codigo"
+      [ngModelOptions]="{standalone: true}" (keyup.enter)="pesquisarRegraImposto()">
+    <button>
       <img src="../../../../assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;"
         alt="Lupa azul para pesquisa">
     </button>

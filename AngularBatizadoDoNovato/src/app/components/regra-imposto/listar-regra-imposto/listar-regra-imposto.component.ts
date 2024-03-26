@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RegraImposto } from '../../../models/regraImposto.model';
 import { RegraImpostoService } from '../../../services/regra-imposto/regra-imposto.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listar-regra-imposto',
@@ -17,36 +16,25 @@ export class ListarRegraImpostoComponent {
     produtos: [],
   };
 
-  constructor(
-    private _regraImpostoService: RegraImpostoService,
-    private _route: ActivatedRoute
-  ) {
+  constructor(private _regraImpostoService: RegraImpostoService) {
     this.regrasImposto = [];
   }
 
   pesquisarRegraImposto() {
-    const id = this._route.snapshot.paramMap.get('id');
+    this._regraImpostoService.get().subscribe({
+      next: (jsonRegraImposto) => {
+        let codigo = jsonRegraImposto.filter(
+          (e) => e.codigo == this.regraImposto.codigo
+        );
 
-    if (this.regraImposto.codigo == parseInt(id!)) {
-      this._regraImpostoService.getById(parseInt(id!)).subscribe({
-        next: (jsonRegraImposto) => {
-          this.regraImposto = jsonRegraImposto;
-        },
-      });
-    } else if (this.regraImposto.codigo.toString() == '***') {
-      this._regraImpostoService.get().subscribe({
-        next: (jsonRegraImposto) => {
+        if (this.regraImposto.codigo.toString() === '***') {
           this.regrasImposto = jsonRegraImposto;
-        },
-      });
-    } else {
-      alert("Cadastro inexistente!")
-    }
-
-
-  }
-
-  testandoCodigo() {
-    console.log(this.regraImposto.codigo);
+        } else if (codigo.length != 0) {
+          this.regrasImposto = codigo;
+        } else {
+          alert('Cadastro inexistente!');
+        }
+      },
+    });
   }
 }
