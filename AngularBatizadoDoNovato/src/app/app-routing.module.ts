@@ -14,7 +14,7 @@ const routes: Routes = [
     component: CadastrarRegraImpostoComponent
   },
   {
-    path: 'regra-imposto/listar-regra-imposto',
+    path: 'regra-imposto/listarRegraImposto',
     component: ListarRegraImpostoComponent
   }
 ];

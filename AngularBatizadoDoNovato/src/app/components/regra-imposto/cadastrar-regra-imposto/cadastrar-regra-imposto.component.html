@@ -3,25 +3,27 @@
     <h2>Cadastrar Nova <b>Regra de Imposto</b></h2>
   </header>
 
-  <form>
+  <form *ngIf="regrasImposto.length == 0, else regraImposto">
     <div class="pure-form">
       <label for="codigo">Código:</label>
-      <input class="pure-input-2-3" type="number" id="codigo" placeholder="Digite um código existente...">
+      <input autofocus class="pure-input-2-3" type="number" id="codigo" placeholder="Digite um código existente..."
+        (keydown.enter)="pesquisarRegraImpostoPorCodigo()">
       <button class="pure-button">
-        <img src="/assets/imagens-do-curso/lupa-pesquisa.png"
-          style="max-width: 20px;" alt="">
+        <img src="/assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;" alt="">
       </button>
     </div>
 
     <div class="form-label">
       <label class="form-label" for="nome">Nome:</label>
-      <input class="form-control" type="text" id="nome" placeholder="Digite um nome...">
+      <input class="form-control" type="text" id="nome" name="nome" placeholder="Digite um nome...">
     </div>
 
     <div class="form-label">
       <label class="form-label" for="taxa">Taxa:</label>
-      <input class="form-control" type="number" id="taxa" placeholder="Digite uma taxa...">
+      <input class="form-control" type="number" id="taxa" name="taxa" placeholder="Digite uma taxa...">
     </div>
+
+
 
     <div class="form-label d-grid gap-2 col-6 mx-auto">
       <button class="btn btn-primary">Gravar</button>
@@ -29,3 +31,22 @@
 
   </form>
 </section>
+
+<ng-template #regraImposto>
+  <section *ngFor="let regra of regrasImposto">
+    <div>
+      <p>Código:</p>
+      <p>{{regra.codigo}}</p>
+    </div>
+
+    <div>
+      <p>Nome:</p>
+      <p>{{regra.nome}}</p>
+    </div>
+
+    <div>
+      <p>Taxa:</p>
+      <p>{{regra.taxa}}</p>
+    </div>
+  </section>
+</ng-template>
