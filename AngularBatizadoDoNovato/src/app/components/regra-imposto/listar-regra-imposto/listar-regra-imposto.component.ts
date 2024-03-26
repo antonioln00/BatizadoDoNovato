@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RegraImposto } from '../../../models/regraImposto.model';
 import { RegraImpostoService } from '../../../services/regra-imposto/regra-imposto.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-regra-imposto',
@@ -16,8 +17,19 @@ export class ListarRegraImpostoComponent {
     produtos: [],
   };
 
-  constructor(private _regraImpostoService: RegraImpostoService) {
+  button: boolean;
+
+  constructor(
+    private _regraImpostoService: RegraImpostoService,
+    private _router: Router
+  ) {
     this.regrasImposto = [];
+    this.button = false;
+  }
+
+  ngOnInit(): void{
+    console.log(this.button);
+
   }
 
   pesquisarRegraImposto() {
@@ -27,14 +39,35 @@ export class ListarRegraImpostoComponent {
           (e) => e.codigo == this.regraImposto.codigo
         );
 
-        if (this.regraImposto.codigo.toString() === '***') {
-          this.regrasImposto = jsonRegraImposto;
-        } else if (codigo.length != 0) {
+        let nome = jsonRegraImposto.filter((e) => {
+          const lowerCaseNome = e.nome.toLowerCase();
+          const lowerCaseTermo = this.regraImposto.nome.toLowerCase();
+
+          return lowerCaseNome.includes(lowerCaseTermo);
+        });
+
+        if (codigo.length != 0) {
           this.regrasImposto = codigo;
+        } else if (nome.length > 0) {
+          this.regrasImposto = nome;
+          this.button = false;
+        } else if (this.regraImposto.nome == "***"){
+          this.regrasImposto = jsonRegraImposto;
+          this.button = false;
         } else {
           alert('Cadastro inexistente!');
         }
       },
     });
+  }
+
+  redirecionarPesquisa() {
+    this._router.navigate([
+      'regra-imposto/listar-regra-imposto/pesquisar-regra-imposto',
+    ]);
+  }
+
+  buttonBoolean(){
+    this.button = true;
   }
 }

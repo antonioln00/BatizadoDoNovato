@@ -1,9 +1,14 @@
-<form>
+<section *ngIf="button == false, else pesquisarPorNome">
+  <form>
+    <div>
+      <label for="codigo">Insira o código:</label> <br>
+      <input type="text" id="codigo" nome="codigo" [(ngModel)]="regraImposto.codigo"
+        [ngModelOptions]="{standalone: true}" (keyup.enter)="pesquisarRegraImposto()">
+    </div>
+  </form>
+
   <div>
-    <label for="codigo">Insira o código:</label> <br>
-    <input type="text" id="codigo" nome="codigo" [(ngModel)]="regraImposto.codigo"
-      [ngModelOptions]="{standalone: true}" (keyup.enter)="pesquisarRegraImposto()">
-    <button>
+    <button (click)="buttonBoolean()" (window:keyup.F2)="redirecionarPesquisa()">
       <img src="../../../../assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;"
         alt="Lupa azul para pesquisa">
     </button>
@@ -11,16 +16,27 @@
 
   <table *ngIf="regrasImposto && regrasImposto.length > 0">
     <thead>
+      <th>Selecionar</th>
       <th>Código</th>
       <th>Nome</th>
       <th>Taxa</th>
     </thead>
     <tbody>
       <tr *ngFor="let regraImposto of regrasImposto">
-          <td>{{regraImposto.codigo}}</td>
-          <td>{{regraImposto.nome}}</td>
-          <td>{{regraImposto.taxa}}</td>
+        <td><img style="max-width: 20px;" src="/assets/imagens-do-curso/selecionar-regra-imposto.png" alt="Selecionar regra de imposto"></td>
+        <td>{{regraImposto.codigo}}</td>
+        <td>{{regraImposto.nome}}</td>
+        <td>{{regraImposto.taxa}}</td>
       </tr>
     </tbody>
   </table>
-</form>
+</section>
+
+
+<ng-template #pesquisarPorNome>
+  <section>
+    <label for="nome">Digite o nome da regra de imposto:</label>
+    <input type="text" id="nome" [(ngModel)]="regraImposto.nome">
+    <button (click)="pesquisarRegraImposto()">Pesquisar</button>
+  </section>
+</ng-template>

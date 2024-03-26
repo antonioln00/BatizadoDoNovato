@@ -8,7 +8,8 @@ import { ProdutoIndexComponent } from './components/produto/produto-index/produt
 import { ListarRegraImpostoComponent } from './components/regra-imposto/listar-regra-imposto/listar-regra-imposto.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CadastrarRegraImpostoComponent } from './components/regra-imposto/cadastrar-regra-imposto/cadastrar-regra-imposto.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,15 @@ import { FormsModule } from '@angular/forms';
     ProdutoIndexComponent,
     ListarRegraImpostoComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CadastrarRegraImpostoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
