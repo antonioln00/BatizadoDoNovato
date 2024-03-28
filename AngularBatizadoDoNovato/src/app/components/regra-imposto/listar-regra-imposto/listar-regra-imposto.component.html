@@ -1,21 +1,29 @@
 <section>
   <form>
-    <div>
-      <label for="nome">Insira o nome para pesquisar:</label> <br>
-      <input type="text" id="nome" nome="nome">
+    <div class="form-label">
+      <label class="form-label" for="nome">Insira o nome para pesquisar:</label> <br>
+      <input autofocus class="form-control" type="text" id="nome" nome="nome" [(ngModel)]="regraImposto.nome"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-label d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary" (click)="pesquisarRegraImposto()">
+        Pesquisar
+      </button>
     </div>
   </form>
 
-  <table *ngIf="regrasImposto && regrasImposto.length > 0, else semResultado">
+  <table *ngIf="regrasImposto.length !== 0 && paragrafo.length == 0, else semResultado" class="table table-striped-columns">
     <thead>
       <th>Selecionar</th>
       <th>Código</th>
       <th>Nome</th>
       <th>Taxa</th>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
       <tr *ngFor="let regraImposto of regrasImposto">
-        <td><img style="max-width: 20px;" src="/assets/imagens-do-curso/selecionar-regra-imposto.png" alt="Selecionar regra de imposto"></td>
+        <td><img style="max-width: 20px;" src="/assets/imagens-do-curso/selecionar-regra-imposto.png"
+            alt="Selecionar regra de imposto"></td>
         <td>{{regraImposto.codigo}}</td>
         <td>{{regraImposto.nome}}</td>
         <td>{{regraImposto.taxa}}</td>
@@ -26,6 +34,6 @@
 
 <ng-template #semResultado>
   <section>
-    <p>Nenhum resultado encontrado</p>
+    <p>{{paragrafo}}</p>
   </section>
 </ng-template>

@@ -16,23 +16,24 @@ export class ListarRegraImpostoComponent {
     taxa: 0,
     produtos: [],
   };
-
-  button: boolean;
+  paragrafo: string = '';
 
   constructor(
     private _regraImpostoService: RegraImpostoService,
     private _router: Router
   ) {
     this.regrasImposto = [];
-    this.button = false;
   }
 
-  ngOnInit(): void{
-    console.log(this.button);
-
-  }
+  ngOnInit(): void {}
 
   pesquisarRegraImposto() {
+    if (!this.regraImposto.nome.trim()) {
+      this.paragrafo = 'Nenhum resultado encontrado.';
+      this.regrasImposto = [];
+      return;
+    }
+
     this._regraImpostoService.get().subscribe({
       next: (jsonRegraImposto) => {
         let codigo = jsonRegraImposto.filter(
@@ -48,26 +49,17 @@ export class ListarRegraImpostoComponent {
 
         if (codigo.length != 0) {
           this.regrasImposto = codigo;
+          this.paragrafo = '';
         } else if (nome.length > 0) {
           this.regrasImposto = nome;
-          this.button = false;
-        } else if (this.regraImposto.nome == "***"){
+          this.paragrafo = '';
+        } else if (this.regraImposto.nome.trim() === '***') {
           this.regrasImposto = jsonRegraImposto;
-          this.button = false;
+          this.paragrafo = '';
         } else {
-          alert('Cadastro inexistente!');
+          this.paragrafo = 'Nenhum resultado encontrado.';
         }
       },
     });
-  }
-
-  redirecionarPesquisa() {
-    this._router.navigate([
-      'regra-imposto/listar-regra-imposto/pesquisar-regra-imposto',
-    ]);
-  }
-
-  buttonBoolean(){
-    this.button = true;
   }
 }

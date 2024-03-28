@@ -7,10 +7,11 @@
     <div class="pure-form">
       <label for="codigo">Código:</label>
       <input autofocus class="pure-input-2-3" type="number" id="codigo" placeholder="Digite um código existente..."
-        (keydown.enter)="pesquisarRegraImpostoPorCodigo()" [(ngModel)]="regraImposto.codigo"
+        (keydown.enter)="onEnterKeyPressed($event)" [(ngModel)]="regraImposto.codigo"
         [ngModelOptions]="{standalone: true}">
-      <button class="pure-button">
-        <img src="/assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;" alt="">
+      <button class="pure-button" (click)="pesquisa()">
+        <img src="/assets/imagens-do-curso/lupa-pesquisa.png" style="max-width: 20px;"
+          alt="Lupa azul para abrir página de pesquisa">
       </button>
     </div>
 

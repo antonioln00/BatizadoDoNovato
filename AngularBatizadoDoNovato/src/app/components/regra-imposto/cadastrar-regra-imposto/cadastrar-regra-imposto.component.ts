@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RegraImposto } from '../../../models/regraImposto.model';
 import { RegraImpostoService } from '../../../services/regra-imposto/regra-imposto.service';
 import { Router } from '@angular/router';
@@ -39,5 +39,19 @@ export class CadastrarRegraImpostoComponent {
         }
       },
     });
+  }
+
+  onEnterKeyPressed(event: any) {
+    event.preventDefault();
+    this.pesquisarRegraImpostoPorCodigo();
+  }
+
+  pesquisa() {
+    this._router.navigate(['regra-imposto/listarRegraImposto'])
+  }
+
+  @HostListener('document:keydown.f2', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    this.pesquisa();
   }
 }
