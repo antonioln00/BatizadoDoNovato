@@ -16,7 +16,6 @@ export class RegraImpostoService {
     let params = new HttpParams()
       .set('skip', pagina)
       .set('take', itensPorPagina);
-    // return this._http.get<RegraImposto[]>(`${this._api}/${pagina}/${itensPorPagina}`);
 
     return this._http.get<RegraImposto[]>(this._api, { params });
   }

@@ -15,13 +15,15 @@ public class RegraImpostoController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<RegraImposto>>> ObterTodos() =>
-        Ok(await _context.RegrasImposto.Select(ri => new {
+    [HttpGet("{skip:int}/{take:int}")]
+    public async Task<ActionResult<IEnumerable<RegraImposto>>> ObterTodos([FromRoute] int skip = 0, [FromRoute] int take = 10) =>
+        Ok(await _context.RegrasImposto.Select(ri => new
+        {
             ri.Codigo,
             ri.Nome,
             ri.Taxa,
-            Produtos = ri.ProdutosRegrasImpostos.Where(e => e.ProdutoCodigo == e.Produto.Codigo).Select(produto => new {
+            Produtos = ri.ProdutosRegrasImpostos.Where(e => e.ProdutoCodigo == e.Produto.Codigo).Select(produto => new
+            {
                 produto.Produto.Codigo,
                 produto.Produto.Nome,
                 produto.Produto.PrecoCusto,
@@ -29,15 +31,17 @@ public class RegraImpostoController : ControllerBase
                 produto.Produto.PrecoVenda,
                 produto.Produto.MargemReal
             })
-        }).ToListAsync());
+        }).Skip(skip).Take(take).ToListAsync());
 
     [HttpGet("{id}")]
     public async Task<ActionResult<RegraImposto>> ObterPorId(int id) =>
-        Ok(await _context.RegrasImposto.Select(ri => new {
+        Ok(await _context.RegrasImposto.Select(ri => new
+        {
             ri.Codigo,
             ri.Nome,
             ri.Taxa,
-            Produtos = ri.ProdutosRegrasImpostos.Where(e => e.ProdutoCodigo == e.Produto.Codigo).Select(produto => new {
+            Produtos = ri.ProdutosRegrasImpostos.Where(e => e.ProdutoCodigo == e.Produto.Codigo).Select(produto => new
+            {
                 produto.Produto.Codigo,
                 produto.Produto.Nome,
                 produto.Produto.PrecoCusto,
@@ -55,7 +59,8 @@ public class RegraImpostoController : ControllerBase
             if (model == null)
                 return BadRequest("Dados inseridos inválidos.");
 
-            var novaRegraImposto = new RegraImposto {
+            var novaRegraImposto = new RegraImposto
+            {
                 Nome = model.Nome,
                 Taxa = model.Taxa,
             };
@@ -76,7 +81,7 @@ public class RegraImpostoController : ControllerBase
         }
         catch (Exception)
         {
-            
+
             throw;
         }
     }
@@ -96,7 +101,7 @@ public class RegraImpostoController : ControllerBase
 
             regraImposto.Nome = model.Nome;
             regraImposto.Taxa = model.Taxa;
-            
+
             _context.RegrasImposto.Update(regraImposto);
             await _context.SaveChangesAsync();
 
@@ -126,7 +131,7 @@ public class RegraImpostoController : ControllerBase
         }
         catch (Exception)
         {
-            
+
             throw;
         }
     }
