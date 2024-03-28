@@ -17,6 +17,7 @@ export class CadastrarRegraImpostoComponent {
     produtos: [],
   };
   paragrafo: string = '';
+  paginaAtual: number = 1;
 
   constructor(
     private _regraImpostoService: RegraImpostoService,
@@ -24,15 +25,14 @@ export class CadastrarRegraImpostoComponent {
   ) {}
 
   pesquisarRegraImpostoPorCodigo() {
-    this._regraImpostoService.get().subscribe({
+    this._regraImpostoService.getById(this.regraImposto.codigo).subscribe({
       next: (jsonRegraImposto) => {
-        let codigo = jsonRegraImposto.filter(
-          (e) => e.codigo == this.regraImposto.codigo
-        );
-        console.log(codigo);
 
-        if (codigo.length > 0) {
-          this.regrasImposto = codigo;
+
+        if (jsonRegraImposto != null) {
+          this.regraImposto = jsonRegraImposto;
+          console.log(this.regraImposto.nome);
+
           this.paragrafo = '';
         } else {
           this.paragrafo = 'Cadastro inexistente.'

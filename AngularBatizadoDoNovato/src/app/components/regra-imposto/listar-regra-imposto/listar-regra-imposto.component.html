@@ -22,8 +22,7 @@
       <th>Taxa</th>
     </thead>
     <tbody class="table-group-divider">
-      <tr
-        *ngFor="let regraImposto of regrasImposto">
+      <tr *ngFor="let regraImposto of regrasImposto">
         <td><img style="max-width: 20px;" src="/assets/imagens-do-curso/selecionar-regra-imposto.png"
             alt="Selecionar regra de imposto"></td>
         <td>{{regraImposto.codigo}}</td>
@@ -32,7 +31,16 @@
       </tr>
     </tbody>
   </table>
+  <app-botao-anterior [regrasAnteriores]="regrasAnteriores">
+
+  </app-botao-anterior>
+
+  <app-botao-proximo [maisRegras]="maisRegras">
+
+  </app-botao-proximo>
 </section>
+
+
 
 <ng-template #semResultado>
   <section>

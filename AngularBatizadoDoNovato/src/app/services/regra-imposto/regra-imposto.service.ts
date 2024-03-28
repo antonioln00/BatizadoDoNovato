@@ -12,12 +12,9 @@ export class RegraImpostoService {
 
   get(pagina: number): Observable<RegraImposto[]> {
     const itensPorPagina: number = 10;
+    const url = `${this._api}/${pagina}/${itensPorPagina}`;
 
-    let params = new HttpParams()
-      .set('skip', pagina)
-      .set('take', itensPorPagina);
-
-    return this._http.get<RegraImposto[]>(this._api, { params });
+    return this._http.get<RegraImposto[]>(url);
   }
 
   getById(id: number): Observable<RegraImposto> {

@@ -17,8 +17,9 @@ export class ListarRegraImpostoComponent {
     produtos: [],
   };
   paragrafo: string = '';
-  paginaAtual: number = 1;
-
+  paginaAtual: number = 0;
+  regrasAnteriores: boolean = false;
+  maisRegras: boolean = true;
 
   constructor(
     private _regraImpostoService: RegraImpostoService,

@@ -15,18 +15,18 @@
       </button>
     </div>
 
-    <div *ngIf="regrasImposto.length > 0, else formularioCadastroRegra">
-      <div *ngFor="let regra of regrasImposto">
+    <div *ngIf="regraImposto != null, else formularioCadastroRegra">
+      <div>
         <div *ngIf="paragrafo.length == 0, else semRegraImposto">
           <div class="form-label">
             <label class="form-label" for="nome">Nome:</label>
-            <input class="form-control" type="text" [value]="regra.nome" id="nome" name="nome"
+            <input class="form-control" type="text" [value]="regraImposto.nome" id="nome" name="nome"
               placeholder="Digite um nome...">
           </div>
 
           <div class="form-label">
             <label class="form-label" for="taxa">Taxa:</label>
-            <input class="form-control" type="number" [value]="regra.taxa" id="taxa" name="taxa"
+            <input class="form-control" type="number" [value]="regraImposto.taxa" id="taxa" name="taxa"
               placeholder="Digite uma taxa...">
           </div>
         </div>

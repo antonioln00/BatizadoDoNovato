@@ -10,7 +10,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CadastrarRegraImpostoComponent } from './components/regra-imposto/cadastrar-regra-imposto/cadastrar-regra-imposto.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { BotaoProximoComponent } from './components/regra-imposto/listar-regra-imposto/botao-proximo/botao-proximo.component';
+import { BotaoAnteriorComponent } from './components/regra-imposto/listar-regra-imposto/botao-anterior/botao-anterior.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ListarRegraImpostoComponent,
     HeaderComponent,
     FooterComponent,
-    CadastrarRegraImpostoComponent
+    CadastrarRegraImpostoComponent,
+    BotaoProximoComponent,
+    BotaoAnteriorComponent
   ],
   imports: [
     BrowserModule,
