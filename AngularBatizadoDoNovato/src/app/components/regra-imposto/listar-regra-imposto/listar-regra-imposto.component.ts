@@ -17,6 +17,8 @@ export class ListarRegraImpostoComponent {
     produtos: [],
   };
   paragrafo: string = '';
+  paginaAtual: number = 1;
+
 
   constructor(
     private _regraImpostoService: RegraImpostoService,
@@ -34,7 +36,7 @@ export class ListarRegraImpostoComponent {
       return;
     }
 
-    this._regraImpostoService.get().subscribe({
+    this._regraImpostoService.get(this.paginaAtual).subscribe({
       next: (jsonRegraImposto) => {
         let codigo = jsonRegraImposto.filter(
           (e) => e.codigo == this.regraImposto.codigo

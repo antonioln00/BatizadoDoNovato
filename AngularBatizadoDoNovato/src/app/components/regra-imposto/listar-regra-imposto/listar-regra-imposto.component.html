@@ -13,7 +13,8 @@
     </div>
   </form>
 
-  <table *ngIf="regrasImposto.length !== 0 && paragrafo.length == 0, else semResultado" class="table table-striped-columns">
+  <table *ngIf="regrasImposto.length !== 0 && paragrafo.length == 0, else semResultado"
+    class="table table-striped-columns">
     <thead>
       <th>Selecionar</th>
       <th>Código</th>
@@ -21,7 +22,8 @@
       <th>Taxa</th>
     </thead>
     <tbody class="table-group-divider">
-      <tr *ngFor="let regraImposto of regrasImposto">
+      <tr
+        *ngFor="let regraImposto of regrasImposto">
         <td><img style="max-width: 20px;" src="/assets/imagens-do-curso/selecionar-regra-imposto.png"
             alt="Selecionar regra de imposto"></td>
         <td>{{regraImposto.codigo}}</td>
